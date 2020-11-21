@@ -1,0 +1,72 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    restart: always
+    networks:
+      net:
+        ipv4_address: 172.0.3.3
+
+  cachet:
+    build:
+      context: ./cachet
+      args:
+        - cachet_ver=2.4
+    environment:
+      - APP_URL=172.0.3.2:8000
+      - APP_KEY=${APP_KEY:-null}
+      - APP_ENV=${APP_ENV:-production}
+      - APP_DEBUG=false
+      - APP_LOG=warninglog
+      - DEBUG=false
+      - DB_DRIVER=pgsql
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PREFIX=${DB_PREFIX}
+      - MAIL_DRIVER=${MAIL_DRIVER}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_ADDRESS=${MAIL_ADDRESS}
+      - MAIL_ENCRYPTION=${MAIL_ENCRYPTION}
+    depends_on:
+      - db
+    restart: on-failure
+    networks:
+      net:
+        ipv4_address: 172.0.3.2
+
+  monitor:
+    build:
+      context: ./cachet-url-monitor
+    image: cachet-url-monitor
+    environment:
+      - CACHET_API=172.0.3.2:8000/api/v1
+      - CACHET_DEV=false
+    volumes:
+      - monitor-config.yml:/usr/src/app/config/config.yml
+    depends_on:
+      - cachet
+    restart: on-failure
+    networks:
+      net:
+        ipv4_address: 172.0.3.4
+
+networks:
+  net:
+    driver: bridge
+    ipam:  # IP Adress Management, to have static IP
+      driver: default
+      config:
+        - subnet: 172.0.3.0/24

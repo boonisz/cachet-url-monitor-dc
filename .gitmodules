@@ -1,0 +1,6 @@
+[submodule "cachet-url-monitor"]
+	path = cachet-url-monitor
+	url = https://github.com/mtakaki/cachet-url-monitor.git
+[submodule "cachet"]
+	path = cachet
+	url = https://github.com/CachetHQ/Docker.git

@@ -1,0 +1,28 @@
+endpoints:
+  - name: Wikipedie
+    url: https://fr.wikipedia.org
+    method: GET
+    header:
+      SOME-HEADER: SOME-VALUE
+    timeout: 1 # seconds
+    expectation:
+      - type: HTTP_STATUS
+        status_range: 200-205
+      - type: LATENCY
+        threshold: 0.3
+    allowed_fails: 0
+    component_id: 1
+    metric_id: 1
+    action:
+      - UPDATE_STATUS
+      - PUSH_METRICS
+    public_incidents: true
+    latency_unit: ms
+    frequency: 60 # in seconds
+cachet:
+  api_url:
+    - type: ENVIRONMENT_VARIABLE
+      value: CACHET_API
+  token:
+    - type: TOKEN
+      value: my_token
