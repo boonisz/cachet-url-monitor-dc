@@ -23,21 +23,21 @@ First time
 
 1. Update submodule for cachet and monitor
 
-    git submodule init
-    git submodule update
+       git submodule init
+       git submodule update
 
 2. Build the docker-compose:
 
-    docker-compose build
+       docker-compose build
 
 3. Launch cachet (this should not work):
 
-    docker-compose up cachet
+       docker-compose up cachet
 
 4. Get the APP_KEY and add it in [.env](.env) file
 5. Re-launch Cachet (in detached mode this time):
 
-    docker-compose up -d cachet
+       docker-compose up -d cachet
 
 6. Configuration via the web interface (172.0.3.2:8000). If you don't now for drivers,
 use `APC(u)` and `Synchronous`.
@@ -46,7 +46,7 @@ use `APC(u)` and `Synchronous`.
 9. Modify the token on the monitor configuration file: [config.yml](cachet-url-monitor-conf/config.yml)
 10. Start the monitor:
 
-    docker-compose up -d monitor
+        docker-compose up -d monitor
 
 
 
@@ -61,7 +61,7 @@ APP_KEY and the token is filled, services can be manage normally with the
  - One can use, [mtakaki docker containers](https://hub.docker.com/r/mtakaki/cachet-url-monitor).
 This repo build the monitor docker, this permits to use it other architecture
 (like ARM with a Raspberry Pi).
- - Data is saved in [data/](./data/) folder.
+ - Data is saved in `data` folder.
 
 
 TODO
