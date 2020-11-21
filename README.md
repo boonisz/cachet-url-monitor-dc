@@ -22,32 +22,32 @@ First time
 ----------
 
 1. Update submodule for cachet and monitor
-    ```bash
+
     git submodule init
     git submodule update
-    ```
+
 2. Build the docker-compose:
-    ```bash
+
     docker-compose build
-    ```
+
 3. Launch cachet (this should not work):
-    ```bash
+
     docker-compose up cachet
-    ```
+
 4. Get the APP_KEY and add it in [.env](.env) file
 5. Re-launch Cachet (in detached mode this time):
-    ```bash
+
     docker-compose up -d cachet
-    ```
+
 6. Configuration via the web interface (172.0.3.2:8000). If you don't now for drivers,
 use `APC(u)` and `Synchronous`.
 7. Connect to Cachet and create components and metrics used by the monitor
 8. Get the token of the user (in 172.0.3.2:8000/dashboard/user)
 9. Modify the token on the monitor configuration file: [config.yml](cachet-url-monitor-conf/config.yml)
 10. Start the monitor:
-    ```bash
+
     docker-compose up -d monitor
-   ```
+
 
 
 Notes
