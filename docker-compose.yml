@@ -55,7 +55,7 @@ services:
       - CACHET_API=172.0.3.2:8000/api/v1
       - CACHET_DEV=false
     volumes:
-      - monitor-config.yml:/usr/src/app/config/config.yml
+      - .monitor-config.yml:/usr/src/app/config/config.yml
     depends_on:
       - cachet
     restart: on-failure
