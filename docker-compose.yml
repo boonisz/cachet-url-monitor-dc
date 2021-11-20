@@ -54,7 +54,7 @@ services:
     environment:
       - CACHET_DEV=false
     volumes:
-      - .monitor-config.yml:/usr/src/app/config/config.yml
+      - ./monitor-config.yml:/usr/src/app/config/config.yml
     depends_on:
       - cachet
     restart: on-failure
