@@ -4,10 +4,12 @@ This docker-compose permits to run:
  - the cachet plugin [cachet-url-monitor](https://github.com/mtakaki/cachet-url-monitor)
 to automatically check components and update status and metrics
 
+Both dockers are launch in a private docker network (`172.0.3.0/24` by default).
+This permits to isolate them. Cachet will be reachable on `172.0.3.2:8000`.
 
  
- Install
- =======
+Install
+=======
 
 Requirements
 ------------
@@ -43,9 +45,10 @@ First time
 use `APC(u)` and `Synchronous`.
 7. Connect to Cachet and create components and metrics used by the monitor
 8. Get the token of the user (in 172.0.3.2:8000/dashboard/user)
-9. Modify the API URL on the monitor configuration file: [config.yml](cachet-url-monitor-conf/config.yml)
-10. Modify the token on the monitor configuration file: [config.yml](cachet-url-monitor-conf/config.yml)
-11. Start the monitor:
+9. Modify on the monitor configuration file [monitor-config.yml](monitor-config.yml):
+   - the `api_url`
+   - the token
+10. Start the monitor:
 
         docker-compose up -d monitor
 
