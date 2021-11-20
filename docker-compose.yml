@@ -52,7 +52,6 @@ services:
       context: ./cachet-url-monitor
     image: cachet-url-monitor
     environment:
-      - CACHET_API=172.0.3.2:8000/api/v1
       - CACHET_DEV=false
     volumes:
       - .monitor-config.yml:/usr/src/app/config/config.yml

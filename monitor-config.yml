@@ -20,9 +20,7 @@ endpoints:
     latency_unit: ms
     frequency: 60 # in seconds
 cachet:
-  api_url:
-    - type: ENVIRONMENT_VARIABLE
-      value: CACHET_API
+  api_url: http://172.0.3.2:8000/api/v1
   token:
     - type: TOKEN
       value: my_token

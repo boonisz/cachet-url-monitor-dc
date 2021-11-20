@@ -45,7 +45,9 @@ First time
 use `APC(u)` and `Synchronous`.
 7. Connect to Cachet and create components and metrics used by the monitor
 8. Get the token of the user (in 172.0.3.2:8000/dashboard/user)
-9. Modify the token on the monitor configuration file: [monitor-config.yml](monitor-config.yml)
+9. Modify on the monitor configuration file [monitor-config.yml](monitor-config.yml):
+   - the `api_url`
+   - the token
 10. Start the monitor:
 
         docker-compose up -d monitor
