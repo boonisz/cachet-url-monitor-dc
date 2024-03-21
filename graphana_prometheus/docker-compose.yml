@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: your_admin_password_here
+      GF_USERS_ALLOW_SIGN_UP: false
+      GF_AUTH_DISABLE_LOGIN_FORM: true
+      GF_AUTH_ANONYMOUS_ENABLED: true
+      GF_AUTH_ANONYMOUS_ORG_NAME: Main Org
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_INSTALL_PLUGINS: grafana-simple-json-datasource
+      GF_DATASOURCES: >
+        {
+          "apiVersion": 1,
+          "datasources": [
+            {
+              "name": "Prometheus",
+              "type": "prometheus",
+              "access": "proxy",
+              "url": "http://prometheus:9090",
+              "isDefault": true
+            }
+          ]
+        }
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  docker-exporter:
+    image: prom/container-exporter:latest
+    ports:
+      - "9323:9323"
+      - "9104:9104"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+
+volumes:
+  grafana_data:
+  prometheus_data:
+
