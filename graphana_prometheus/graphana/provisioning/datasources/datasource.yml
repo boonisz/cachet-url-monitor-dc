@@ -41,10 +41,7 @@ datasources:
       user: foo
       password: foo
     secureJsonData:
-      # <string> Sets the database password, if necessary.
       password: foo
-      # <string> Sets the basic authorization password.
-      basicAuthPassword: foo
     name: Sidekick postgres database
     orgId: '1'
     readOnly: 'false'
