@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['docker-exporter:9104']
+#      - targets: ['localhost:9104']
+
+  - job_name: 'sidekick_api'
+    static_configs:
+#      - targets: ['localhost:25000']
+      - targets: ['api:25000']
+#      - targets: ['100.98.53.102:5173']
+#      - targets: ['100.98.53.102:25173']
+
+
+

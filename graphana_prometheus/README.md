@@ -12,3 +12,32 @@ Prometheus:
 
 After starting the services, you can access Grafana at http://localhost:3000 and Prometheus at http://localhost:9090.
 
+# Todo
+- connect services
+  - sidekick
+    - db
+      - [ ] db as graphana datasource
+      - [ ] db as prometheus job
+    - api
+      - [ ] create `/metrics` endpoint
+      - [ ]
+    - ui
+      - [ ] determine alternative to `/metrics` endpoint
+  - tracking
+    - create metrics endpoint
+      - [ ] create empty-response endpoint and configure in prometheus `/metrics`
+      - add metrics to response body
+        - [ ] camera connectivity
+        - [ ] detection model connectivity
+        - [ ] ffmpeg rtsp stream process status
+        - [ ] sidekick api connectivity
+    - multiprocessing
+      - [ ] try this https://prometheus.github.io/client_python/multiprocess/
+- alerts
+  - [ ] how alerts will be sent: from graphana or prometheus?
+  - [ ] send alert
+- show status
+  - [x] prometheus targets shows status - show in graphana?
+  - [ ] graphana postgres datasource status?
+- show incidents
+  - show errors: graphana or prometheus
