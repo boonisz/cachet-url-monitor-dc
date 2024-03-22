@@ -12,6 +12,23 @@ Prometheus:
 
 After starting the services, you can access Grafana at http://localhost:3000 and Prometheus at http://localhost:9090.
 
+# Provisioning
+https://grafana.com/docs/grafana/latest/administration/provisioning/
+## Export all datasources
+```shell
+# Use this to export all datasources from the grafana api
+# It's easy to configure datasources in the UI, but that's a manual process that we shouldn't have to repeat in each environment
+# Grafana will auto-provision datasources during startup that it finds in the /etc/grafana/provisioning/datasources folder
+
+# Auth note:
+# if auth is required, the curl flag is: [-u admin:your_admin_password_here]
+
+curl -s "http://localhost:3000/api/datasources" \
+  | jq -r '[.[] | with_entries(.value |= tostring | if .key == "jsonData" then .value = (.value | fromjson) else . end)] | {datasources: .}' \
+  | python3 -c 'import yaml, sys; print("apiVersion: 1\n\n" + yaml.dump(yaml.safe_load(sys.stdin.read()), default_flow_style=False))' \
+  > datasources.yml
+```
+
 # Todo
 - connect services
   - sidekick
