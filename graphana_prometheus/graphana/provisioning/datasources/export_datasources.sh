@@ -6,9 +6,20 @@
 
 curl -s "http://localhost:3000/api/datasources" -u admin:your_admin_password_here | jq
 
-mkdir -p datasources \
-  && curl -s "http://localhost:3000/api/datasources" \
+#curl -s "http://localhost:3000/api/datasources" \
+#  -u admin:your_admin_password_here \
+#  | jq -r '[.[] | with_entries(.value |= tostring)] | {datasources: .}' \
+#  | python3 -c 'import yaml, sys; print("apiVersion: 1\n\n" + yaml.dump(yaml.safe_load(sys.stdin.read()), default_flow_style=False))'\
+#  > datasources.yml
+
+#curl -s "http://localhost:3000/api/datasources" \
+#  -u admin:your_admin_password_here \
+#  | jq -r '[.[] | with_entries(.value |= tostring | if .key == "readOnly" then .value = "false" elif .key == "jsonData" then .value = (.value | fromjson) else . end)] | {datasources: .}' \
+#  | python3 -c 'import yaml, sys; print("apiVersion: 1\n\n" + yaml.dump(yaml.safe_load(sys.stdin.read()), default_flow_style=False))' \
+#  > datasources.yml
+
+curl -s "http://localhost:3000/api/datasources" \
   -u admin:your_admin_password_here \
-  | jq -r '[.[] | with_entries(.value |= tostring)] | {datasources: .}' \
-  | python3 -c 'import yaml, sys; print("apiVersion: 1\n\n" + yaml.dump(yaml.safe_load(sys.stdin.read()), default_flow_style=False))'\
+  | jq -r '[.[] | with_entries(.value |= tostring | if .key == "jsonData" then .value = (.value | fromjson) else . end)] | {datasources: .}' \
+  | python3 -c 'import yaml, sys; print("apiVersion: 1\n\n" + yaml.dump(yaml.safe_load(sys.stdin.read()), default_flow_style=False))' \
   > datasources.yml

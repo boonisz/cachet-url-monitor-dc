@@ -6,13 +6,8 @@ datasources:
   database: ''
   id: '2'
   isDefault: 'false'
-  jsonData:
-    connMaxLifetime: 14400
-    database: koda
-    maxIdleConns: 100
-    maxIdleConnsAuto: true
-    maxOpenConns: 100
-    sslmode: disable
+#  jsonData: {}
+  jsonData: {"connMaxLifetime":14400,"database":"koda","maxIdleConns":100,"maxIdleConnsAuto":true,"maxOpenConns":100,"sslmode":"disable"}
   name: grafana-postgresql-datasource
   orgId: '1'
   readOnly: 'true'
