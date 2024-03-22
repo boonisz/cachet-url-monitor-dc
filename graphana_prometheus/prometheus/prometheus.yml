@@ -18,5 +18,17 @@ scrape_configs:
 #      - targets: ['100.98.53.102:5173']
 #      - targets: ['100.98.53.102:25173']
 
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: [ 'localhost:5432' ] # Replace 'postgresql-host' with the hostname or IP address of your PostgreSQL server
+    params:
+      query: [ 'pg_*' ]  # Include specific PostgreSQL metrics you want to scrape
+
+    # Optional settings
+    scheme: http # or https if using SSL/TLS
+    basic_auth:
+      username: foo
+      password: foo
+
 
 
