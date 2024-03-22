@@ -37,18 +37,6 @@ services:
     networks:
       - koda_sidekick_koda_network
 
-#  postgres-exporter-pgserver94:
-#    image: wrouesnel/postgres_exporter:latest
-#    configs:
-#      - source: postgres_exporter_config
-#        target: /etc/postgres_exporter/queries.yaml
-#    deploy:
-#      mode: replicated
-#      replicas: 1
-#    environment:
-#      - DATA_SOURCE_NAME=postgresql://postgres@pgserver94.example.com:5432/postgres?sslmode=disable
-#      - PG_EXPORTER_EXTEND_QUERY_PATH=/etc/postgres_exporter/queries.yaml
-
 networks:
   koda_sidekick_koda_network:
     external: true

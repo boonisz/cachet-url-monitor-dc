@@ -48,7 +48,8 @@ datasources:
     type: grafana-postgresql-datasource
     typeLogoUrl: public/app/plugins/datasource/grafana-postgresql-datasource/img/postgresql_logo.svg
     typeName: PostgreSQL
-    uid: fdgdsv9fu5kaoa
+#    uid: fdgdsv9fu5kaoa
     url: koda_postgres:5432
+#    url: localhost:5432
     user: foo
 
